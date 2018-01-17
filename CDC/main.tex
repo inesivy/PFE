@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Cahier Des Charges \\[0.4 cm] Routage vers trou noir piloté à distance }						
+%title
+\author{{Albert Truong} \\{Inès Frihi}\\{Othmane Fouzi} \\ {Ruslan Pichuzhkin} }   
+
+\date{\today}								
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+%\rhead
+\lhead{Routage vers trou noir piloté à distance}
+\cfoot{\thepage}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[width=0.2 \textwidth]{images/bdx.jpg}\\[1.0 cm]	% University Logo
+    \textsc{\LARGE Université de Bordeaux}\\[2.0 cm]	% University Name
+	\textsc{\large Master 2 RCI 2017–2018}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{\huge \bfseries \thetitle }\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Auteurs:}\\
+            \vspace{0.2cm}
+		    \theauthor
+			\end{flushleft}
+			\end{minipage}
+			\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+            \vspace{-1.5cm}
+			\emph{Responsable:} \\
+            \vspace{0.2cm}
+			M.Damien Magoni 	
+								
+		\end{flushright}
+	\end{minipage}\\[2 cm]
+	
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+\tableofcontents
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Présentation du projet}
+\input{presentation.tex}
+
+\section{Analyse des besoins}
+\input{Analyse/analyse.tex}
+
+
+%\section{Diagrammes UML}
+%\subsection{Diagramme de cas d’utilisation}
+%\subsection{Diagramme de flux de données}
+%\subsection{Diagramme de séquence }
+%\section{Délais et Gantt}
+%\section{Éléments bibliographiques}
+%\clearpage
+%\nocite{*}
+%\bibliographystyle{alpha}
+%\bibliography{mybiblio.bib}
+\end{document}
