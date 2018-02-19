@@ -1,1 +1,23 @@
 Routage vers trou noir piloté à distance.
+
+
+
+//Installation de dynamips:
+https://github.com/GNS3/dynamips
+
+Usage:
+
+//lancement de R1 et R2
+./dyna.sh
+
+
+source nemu-init.rc
+
+//pour lancer le script python 
+nemu -f bhre.py -i
+
+//lancer les VMs
+
+
+
+
