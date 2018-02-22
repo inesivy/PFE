@@ -21,8 +21,7 @@ VHost('border-router', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travai
 
 VHost('route-server', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='route-server.img')], 
 	nics=[
-	VNic(hw='0a:0a:0a:00:03:01'), 
-	VNic(hw='0c:0c:0c:00:03:03')])
+	VNic(hw='0a:0a:0a:00:03:01'),VNic(hw='0a:0a:0a:00:03:03')])
 
 VHost('target', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='web-server.img')], 
 	nics=[
@@ -74,12 +73,13 @@ Link(client='route-server:0', core='sw3:1')
 Link(client='target:0', core='sw4:0')
 Link(client='border-router:1', core='sw4:1')
 
+'faire dhclient eth2'
 VSlirp('slirp1', net='192.168.1.0/24')
 Link(client='attacker:2', core='slirp1')
-
+'faire dhclient eth2'
 VSlirp('slirp2', net='192.168.2.0/24')
 Link(client='border-router:2', core='slirp2')
-
+'faire dhclient eth1'
 VSlirp('slirp3', net='192.168.3.0/24')
 Link(client='route-server:1', core='slirp3')
 
@@ -88,4 +88,6 @@ Link(client='target:1', core='slirp4')
 
 VSlirp('slirp5', net='192.168.5.0/24')
 Link(client='client:2', core='slirp5')
+
+
 
