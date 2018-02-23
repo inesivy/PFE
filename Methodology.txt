@@ -1,6 +1,7 @@
 Remotely Triggered Black Hole Routing (RTBH) Methodology
 --------------------------------------------------------
 
+
 1. launch: ./dyna.sh which fires 2 routers in non-hypervisor mode (access them with telnet 127.0.0.1 2001 the port nb given by the -T option)
 2. launch nemu script with: nemu -f bhre.py -i
 3. from nemu interpreter launch: StartNemu()
@@ -20,6 +21,42 @@ https://thepacketgeek.com/advanced-router-peering-and-route-announcement/
 - AS Path: as-path [ 65000 65010 65020 ]
 - Community: community [65000:2]
 (local-preference will only work if ExaBGP and the peer you’re advertising to are in the same AS)
+
+_______________________________________________________________________________________________
+
+Usage:
+
+//Installation de dynamips:
+https://github.com/GNS3/dynamips
+
+//lancement de R1 et R2
+./dyna.sh
+configurer les routeurs
+
+cd /net/ens/vince/virt/
+source nemu-init.rc
+
+//pour lancer le script python 
+nemu -f bhre.py -i
+
+//lancer les VMs
+StartNemu()
+faire les updates : apt-get update 
+
+//sauvegarder 
+SaveNemu()
+
+//fermer Correctement les VMs
+DelNemu()
+exit()
+
+//router-server
+installer  
+curl exabgp
+
+
+
+
 
 
 DDoS Black-holing with ExaBGP in a Provider Network At the beginning there is a DDos At the end there is mostly happyness You have a Server/Customer in your Network which is under a DDoS attack.
