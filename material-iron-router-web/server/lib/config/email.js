@@ -1,4 +1,4 @@
-/*
+
 Accounts.emailTemplates.siteName = "MySite";
 
 Accounts.emailTemplates.from = "MySite <support@mysite.com>";
@@ -21,4 +21,4 @@ Accounts.emailTemplates.resetPassword.text = function (user, url) {
         "Cheers,\n" +
         signature;
 };
-*/
+
