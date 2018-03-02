@@ -35,3 +35,5 @@ google-config-ui
 dynamic-import
 alanning:roles
 themeteorchef:jquery-validation
+ostrio:iron-router-protected
+http
