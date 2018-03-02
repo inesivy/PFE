@@ -78,6 +78,8 @@ oauth@1.2.1
 oauth2@1.2.0
 observe-sequence@1.0.16
 ordered-dict@1.1.0
+ostrio:iron-router-helper-class@1.0.1
+ostrio:iron-router-protected@1.1.5
 promise@0.10.2
 random@1.1.0
 rate-limit@1.0.9
