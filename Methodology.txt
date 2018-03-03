@@ -54,6 +54,40 @@ exit()
 installer  
 curl exabgp
 
+------------------------------------------------------------------------------------------------------
+---------------------------------------------------
+//Configuration R1
+
+interface FastEthernet0/0
+ ip address 192.168.5.2 255.255.255.0
+ no shutdown
+
+interface FastEthernet1/0
+ ip address 192.168.2.2 255.255.255.0
+ no shutdown
+
+interface FastEthernet2/0
+ ip address 192.168.6.1 255.255.255.0
+ no shutdown
+
+
+
+---------------------------------------------------
+//configuration R2
+
+interface FastEthernet0/0
+ ip address 192.168.4.2 255.255.255.0
+ no shutdown
+
+interface FastEthernet1/0
+ ip address 192.168.1.2 255.255.255.0
+ no shutdown
+
+interface FastEthernet2/0
+ ip address 192.168.6.2 255.255.255.0
+ no shutdown
+-----------------------------------------------------
+
 
 
 
