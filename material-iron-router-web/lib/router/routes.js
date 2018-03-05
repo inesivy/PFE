@@ -29,40 +29,49 @@ Router.map(function() {
 	   }
 });
   /////SHow routes
-  this.route('/showRoutes/', {
-     name: 'showRoutes',
+  this.route('/routes/', {
+     name: 'routes',
      template: 'showRoutes'
-  });
-  ///ADD routes
-      this.route('/addRoutes',{
-      //  where: 'server',
-  	    name: 'addRoutes',
-  	    template: 'addRoutes',
-  	    onBeforeAction: function(){
-               var user = Meteor.user();
-  	     if (!Roles.userIsInRole(user, ["admin"])) {
-                 // console.log(user)
-                  Router.go('/forbidden');
-             }
-        else{
-  		     this.next();
-        }
-  	  }
   });
     this.route('/settings');
     this.route('/forbidden');
 });
   //API
-      Router.route('/routes', {
+  if(Meteor.isServer){
+
+      Router.route('/api/:id_user/', {
+       //path: 'api/:_id/:_id_route',
         where: 'server',
         //allowedRoles: ['']
       })
     .get(function(){
-          var response = Routes.find().fetch();
-          console.log(response)
-          this.response.setHeader('Content-Type','application/json');
-          this.response.end(JSON.stringify(response));
-      })
+      var response;
+      if(  this.params.id_user !== undefined) {
+           var user = Meteor.users.findOne({_id : this.params.id_user});
+           console.log(user)
+           if(user !== undefined) {
+             if(user.roles=='admin'){
+               var response = Routes.find().fetch();
+               console.log(response)
+             }
+             else{
+               response = {
+                   "error" : true,
+                   "message" : "Access denied."
+                   }
+              }
+       }
+       else {
+           response = {
+               "error" : true,
+               "message" : "User not found."
+           }
+       }
+       this.response.setHeader('Content-Type','application/json');
+       this.response.end(JSON.stringify(response));
+    }
+
+  })
       .post(function(){
          var response;
           if(this.request.body.address === undefined || this.request.body.path === undefined||
@@ -91,12 +100,12 @@ Router.map(function() {
           this.response.setHeader('Content-Type','application/json');
           this.response.end(JSON.stringify(response));
       });
-
+}
 
 
   ///delete and update Routes
-  Router.route('/routes/:id', {
-      //path: '/showRoutes/:id',
+  Router.route('/api/:id_user/:id_route', {
+      //path: '/routes/:id',
       where: 'server'
   })
   .delete(function(){
@@ -156,7 +165,7 @@ Router.map(function() {
 
 
 Router.plugin('ensureSignedIn', {
-  only: ['manageUsers','showRoutes','addRoutes','settings'],
+  only: ['manageUsers','routes','settings'],
 });
 
 //Routes
