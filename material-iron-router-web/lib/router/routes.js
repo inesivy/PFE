@@ -14,9 +14,9 @@ Router.map(function() {
 
     });
 
-    this.route('/manageUsers',{
-	    name: 'manageUsers',
-	    template: 'manageUsers',
+    this.route('/users',{
+	    name: 'users',
+	    template: 'users',
 	    onBeforeAction: function(){
              var user = Meteor.user();
 	     if (!Roles.userIsInRole(user, ["admin"])) {
@@ -40,9 +40,7 @@ Router.map(function() {
   if(Meteor.isServer){
 
       Router.route('/api/:id_user/', {
-       //path: 'api/:_id/:_id_route',
         where: 'server',
-        //allowedRoles: ['']
       })
     .get(function(){
       var response;
@@ -74,7 +72,12 @@ Router.map(function() {
   })
       .post(function(){
          var response;
-          if(this.request.body.address === undefined || this.request.body.path === undefined||
+         if(  this.params.id_user !== undefined) {
+           var user = Meteor.users.findOne({_id : this.params.id_user});
+           console.log(user)
+           if(user !== undefined) {
+             if(user.roles=='admin'){
+                if(this.request.body.address === undefined || this.request.body.path === undefined||
           this.request.body.community === undefined || this.request.body.next_hop === undefined||
           this.request.body.origin === undefined || this.request.body.local === undefined||
           this.request.body.med === undefined) {
@@ -82,7 +85,8 @@ Router.map(function() {
                   "error" : true,
                   "message" : "invalid data"
               };
-          } else {
+          }
+          else {
               Routes.insert({
                   Address : this.request.body.address,
                   Path : this.request.body.path,
@@ -97,21 +101,39 @@ Router.map(function() {
                   "message" : "Route added."
               }
           }
+        }
+        else{
+          response = {
+              "error" : true,
+              "message" : "Access denied."
+              }
+         }
+       }
+       else {
+           response = {
+               "error" : true,
+               "message" : "User not found."
+           }
+       }
           this.response.setHeader('Content-Type','application/json');
           this.response.end(JSON.stringify(response));
+        }
       });
 }
 
 
   ///delete and update Routes
   Router.route('/api/:id_user/:id_route', {
-      //path: '/routes/:id',
       where: 'server'
   })
   .delete(function(){
       var response;
           if(this.params.id !== undefined) {
-              var data = Routes.find({_id : this.params.id}).fetch();
+            var user = Meteor.users.findOne({_id : this.params.id_user});
+            console.log(user)
+            if(user !== undefined) {
+              if(user.roles=='admin'){
+              var data = Routes.find({_id : this.params.id_route}).fetch();
               if(data.length >  0) {
                   if(Routes.remove(data[0]._id) === 1) {
                       response = {
@@ -129,15 +151,34 @@ Router.map(function() {
                       "error" : true,
                       "message" : "Route not found."
                   }
+               }
               }
-          }
-          this.response.setHeader('Content-Type','application/json');
-          this.response.end(JSON.stringify(response));
+              else{
+                response = {
+                    "error" : true,
+                    "message" : "Access denied."
+                    }
+               }
+        }
+        else {
+            response = {
+                "error" : true,
+                "message" : "User not found."
+            }
+        }
+        this.response.setHeader('Content-Type','application/json');
+        this.response.end(JSON.stringify(response));
+      }
+
   })
   .put(function(){
     var response;
        if(this.params.id !== undefined) {
-           var data = Routes.find({_id : this.params.id}).fetch();
+         var user = Meteor.users.findOne({_id : this.params.id_user});
+         console.log(user)
+         if(user !== undefined) {
+           if(user.roles=='admin'){
+           var data = Routes.find({_id : this.params.id_route}).fetch();
            if(data.length > 0) {
                if(Routes.update({_id : data[0]._id},{$set : {Address : this.request.body.address,Path : this.request.body.path,
                NextHop : this.request.body.next_hop,Community : this.request.body.community,Origin : this.request.body.origin,
@@ -158,14 +199,29 @@ Router.map(function() {
                    "message" : "Route not found."
                }
            }
+         }
+         else{
+           response = {
+               "error" : true,
+               "message" : "Access denied."
+               }
+          }
+        }
+        else {
+            response = {
+                "error" : true,
+                "message" : "User not found."
+            }
+        }
+           this.response.setHeader('Content-Type','application/json');
+           this.response.end(JSON.stringify(response));
        }
-       this.response.setHeader('Content-Type','application/json');
-       this.response.end(JSON.stringify(response));
+
   });
 
 
 Router.plugin('ensureSignedIn', {
-  only: ['manageUsers','routes','settings'],
+  only: ['users','routes','settings'],
 });
 
 //Routes
