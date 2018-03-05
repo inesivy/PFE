@@ -1,2 +1,4 @@
 smart.lock
 packages/
+.idea/
+node_modules/

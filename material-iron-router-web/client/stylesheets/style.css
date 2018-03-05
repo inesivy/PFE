@@ -5,11 +5,11 @@ html {
 
 body {
   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif /*rtl:prepend:"Droid Arabic Kufi","Droid Sans", */;
-  background: #fcfcfc url(/imgs/bg.jpg) repeat;
+  background: #fcfcfc url("/imgs/bg.jpg") repeat;
   margin: 0px;
   /* Margin bottom by footer height */
   margin-bottom: 70px;
-,  padding: 0px;
+  padding: 0px;
   color: #555555;
   min-width: 320px;
 }
@@ -65,7 +65,7 @@ footer {
   }
 }
 tfoot input {
-        width: 100%;
-        padding: 3px;
-        box-sizing: border-box;
-    }
+  width: 100%;
+  padding: 3px;
+  box-sizing: border-box;
+}
