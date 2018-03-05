@@ -37,3 +37,5 @@ alanning:roles
 themeteorchef:jquery-validation
 ostrio:iron-router-protected
 http
+ecmascript
+practicalmeteor:chai

@@ -10,7 +10,7 @@
           ////////////////////////////////////////////////////////////////////
           // Create Test Users
           //
-          if (Meteor.users.find().fetch().length === 1) {
+          if (Meteor.users.find().fetch().length === 0) {
 
             console.log('Creating users: ');
 
@@ -87,7 +87,6 @@ Meteor.publish("settings", function () {
   }
 
   this.stop();
-  return;
 });
 // Authorized admins can manage user accounts
 Meteor.publish("addRoutes", function () {
@@ -98,7 +97,6 @@ Meteor.publish("addRoutes", function () {
     throw new Meteor.Error(403, "Access denied")
   }
   this.stop();
-  return;
 });
 // Authorized admins can manage user accounts
 Meteor.publish("manageUsers", function () {
@@ -109,5 +107,4 @@ Meteor.publish("manageUsers", function () {
     return Meteor.users.find({}, { fields: { emails: 1, profile: 1, roles: 1 }});
   }
   this.stop();
-  return;
 });
