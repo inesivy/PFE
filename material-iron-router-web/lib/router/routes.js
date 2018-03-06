@@ -48,7 +48,7 @@ Router.map(function() {
            var user = Meteor.users.findOne({_id : this.params.id_user});
            console.log(user)
            if(user !== undefined) {
-             if(user.roles=='admin'){
+             if(user.roles=='admin'||user.roles=='normal'){
                var response = Routes.find().fetch();
                console.log(response)
              }
