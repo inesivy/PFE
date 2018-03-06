@@ -21,7 +21,8 @@ if (Meteor.isServer) {
 
     describe('Emails', function () {
         it('Emails is an array', function () {
-            chai.assert.isDefined(Meteor.users.find(emails));
+            chai.assert.isDefined(Meteor.us
+            ers.find(emails));
             chai.assert.isArray(Meteor.users.find(emails));
         })
     })
