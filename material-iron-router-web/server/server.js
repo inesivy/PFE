@@ -6,7 +6,7 @@
   if(Meteor.isServer) {
      // When Meteor starts, create new collection in Mongo if not exists.
       Meteor.startup(function () {
-          var Routes = new Meteor.Collection('routes');
+          Routes = new Meteor.Collection('routes');
           ////////////////////////////////////////////////////////////////////
           // Create Test Users
           //
@@ -32,7 +32,7 @@
               });
 
               // email verification
-              Meteor.users.update({_id: id}, { $set: {'emails.0.verified': true } });
+              Meteor.users.update({_id: id}, {$set:{'emails.0.verified': true}});
 
               Roles.addUsersToRoles(id, userData.roles);
 
@@ -40,22 +40,20 @@
           }
 
       });
-    
+
 
   ////////////////////////////////////////////////////////////////////
   // Prevent non-authorized users from creating new users
   //
 
   Accounts.validateNewUser(function (user) {
-    return true;
-    /*
-    var loggedInUser = user;
+    var loggedInUser = Meteor.user();
+
     if (Roles.userIsInRole(loggedInUser, ['admin'])) {
       return true;
     }
 
     throw new Meteor.Error(403, "Not authorized to create new users");
-    */
   });
 }
 
@@ -68,14 +66,15 @@
 
 // Authorized users can view routes
 Meteor.publish("showRoutes", function () {
-  var user = Meteor.users.findOne({ _id: this.userId });
+  var user = Meteor.users.findOne({_id:this.userId});
 
   if (Roles.userIsInRole(user, ["admin","normal"])) {
-    console.log('publishing routes', this.userId);
+    console.log('publishing routes', this.userId)
     return Meteor.routes.find();
   }
 
   this.stop();
+  return;
 });
 // Authorized users can view settings
 Meteor.publish("settings", function () {
@@ -106,7 +105,7 @@ Meteor.publish("manageUsers", function () {
 
   if (Roles.userIsInRole(user, ["admin"])) {
     console.log('publishing users', this.userId)
-    return Meteor.users.find({}, { fields: { emails: 1, profile: 1, roles: 1 }});
+    return Meteor.users.find({}, {fields: {emails: 1, profile: 1, roles: 1}});
   }
   this.stop();
   return;
