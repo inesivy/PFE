@@ -5,30 +5,32 @@ InitNemu()
 
 "InitNemu(session='blackholerouting', workspace='/home/magoni/bhre/', hdcopy=True)"
 
+vf =VFs('/net/ens/vince/virt/fs/debian8.img'
+
 VHostConf('debian', display='sdl', vga='std', enable_kvm=None, localtime=None, k='fr', m='4G', cpu='kvm64')
 
-VHost('attacker', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='attacker.img')], 
+VHost('attacker', conf='debian', hds=[vf, 'cow', tag='attacker.img')], 
 	nics=[
 	VNic(hw='0a:0a:0a:00:01:01'),
 	VNic(hw='0a:0a:0a:00:01:02'), 
 	VNic(hw='0c:0c:0c:00:01:01')])
 
-VHost('border-router', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='ce-bgp.img')], 
+VHost('border-router', conf='debian', hds=[vf, 'cow', tag='ce-bgp.img')], 
 	nics=[
 	VNic(hw='0a:0a:0a:00:02:01'), 
 	VNic(hw='0a:0a:0a:00:02:02'), 
 	VNic(hw='0c:0c:0c:00:02:02')])
 
-VHost('route-server', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='route-server.img')], 
+VHost('route-server', conf='debian', hds=[vf, 'cow', tag='route-server.img')], 
 	nics=[
 	VNic(hw='0a:0a:0a:00:03:01'),VNic(hw='0a:0a:0a:00:03:03')])
 
-VHost('target', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='web-server.img')], 
+VHost('target', conf='debian', hds=[vf, 'cow', tag='web-server.img')], 
 	nics=[
 	VNic(hw='0a:0a:0a:00:04:01'), 
 	VNic(hw='0c:0c:0c:00:04:04')])
 
-VHost('client', conf='debian', hds=[VFs('/net/cremi/ofouzi/espaces/travail/PFE/debian8.img', 'cow', tag='client.img')], 
+VHost('client', conf='debian', hds=vf, 'cow', tag='client.img')], 
 	nics=[
 	VNic(hw='0a:0a:0a:00:05:01'), 
 	VNic(hw='0a:0a:0a:00:05:02'), 
