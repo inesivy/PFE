@@ -17,7 +17,13 @@ Template.settings.events({
    });
  }
 });
+Template.settings.helpers({
+   email: function(){
+     var user=Meteor.user();
+       return user.emails
+   }
 
+});
 Template.settings.onRendered (function(){
   $("#settings").validate({
           rules: {

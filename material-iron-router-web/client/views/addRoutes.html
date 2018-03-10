@@ -11,45 +11,45 @@
           <form class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="source" type="text" class="validate">
-                <label for="source">Address</label>
+                <input id="address" name="address" type="text" class="validate">
+                <label for="address">Address</label>
               </div>
               </div>
              <div class="row">
               <div class="input-field col s6">
-                <input id="dest" type="text" class="validate">
-                <label for="dest">Next hop</label>
+                <input id="nexthop" name="nexthop" type="text" class="validate">
+                <label for="nexthop">Next hop</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s1">
-                <input id="med" type="number" min=0 class="validate">
+                <input id="med" name="med" type="number" min=0 class="validate">
                 <label for="med">MED</label>
               </div>
               <div class="input-field col s2">
-                <input id="local-pref" type="number" min=0 class="validate">
-                <label for="local-pref">Local Preference</label>
+                <input id="local_pref" name="local_pref" type="number" min=0 class="validate">
+                <label for="local_pref">Local Preference</label>
               </div>
               <div class="input-field col s1">
-                <input id="origin" type="text" class="validate">
+                <input id="origin" name="origin" type="text" class="validate">
                 <label for="origin">Origin</label>
               </div>
             </div>
             <div class="row">
              <div class="input-field col s6">
-               <input id="as-path" type="text" class="validate">
-               <label for="as-path">AS Path</label>
+               <input id="as_path" name="as_path" type="text" class="validate">
+               <label for="as_path">AS Path</label>
              </div>
            </div>
            <div class="row">
             <div class="input-field col s6">
-              <input id="community" type="text" class="validate">
+              <input id="community" name="community" type="text" class="validate">
               <label for="community">Community</label>
             </div>
           </div>
       <div class="row">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <button class="btn waves-effect waves-light" type="submit" name="action">Sauvegarder<i class="material-icons right">send</i></button>
+      <button class="btn waves-effect waves-light" type="submit" name="add">Sauvegarder<i class="material-icons right">send</i></button>
       </div>
           </form>
 

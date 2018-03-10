@@ -9,10 +9,10 @@
           <li class="{{isActiveRoute regex='home'}}"><a href="{{pathFor 'home'}}">Accueil</a></li>
           <li class="{{isActiveRoute regex='routes'}}"><a href="{{pathFor 'routes'}}">Routage</a></li>
           {{#if isInRole 'admin'}}
-          <li class="{{isActiveRoute regex='manageUsers'}}"><a href="{{pathFor 'manageUsers'}}">Gestion des utilisateurs</a></li>
+          <li class="{{isActiveRoute regex='users'}}"><a href="{{pathFor 'users'}}">Gestion des utilisateurs</a></li>
           {{/if}}
-	  {{#if isInRole 'admin,normal'}}
- 	  <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Parametrages</a></li>
+	         {{#if isInRole 'admin,normal'}}
+ 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Parametrages</a></li>
           {{/if}}
           <li>{{> atNavButton }}</li>
         </ul>
