@@ -5,4 +5,7 @@
 </head>
 
 <body>
+<div style="text-align:center;">
+<a class="btn btn-floating btn-large pulse"><i class="material-icons">cloud</i></a>
+</div>
 </body>
