@@ -10,7 +10,7 @@
           ////////////////////////////////////////////////////////////////////
           // Create Test Users
           //
-          if (Meteor.users.find().fetch().length === 1) {
+          if (Meteor.users.find().fetch().length === 0) {
            process.env.MAIL_URL="smtp://meteor.email.2014%40gmail.com:P455w0rd2014@smtp.gmail.com:465/";
             console.log('Creating users: ');
 
