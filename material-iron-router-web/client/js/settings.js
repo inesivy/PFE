@@ -1,7 +1,7 @@
 
 if (Meteor.isClient) {
 Template.settings.events({
-  'submit form': function ( event ) {
+  'submit #change_password': function ( event ) {
     event.preventDefault();
     var old_password    = $( '[name="old_password"]' ).val();
     var  password = $('[name="password"]').val();
@@ -15,8 +15,29 @@ Template.settings.events({
         Router.go('/')
       }
    });
+ },
+ 'submit #change_email': function ( event ) {
+   event.preventDefault();
+   var email    = $( '[name="email"]' ).val();
+   if (email) {
+  Meteor.call('updateEmail', email, error => {
+    if (error){
+      console.log(`Error updating email address: {error}`);
+       Materialize.toast(error.reason, 4000)
+    }
+    else{
+      Materialize.toast('Email was changed!', 4000) // 4000 is the duration of the toast
+      Router.go('/')
+    }
+  });
+}
+
  }
+
+
 });
+
+
 Template.settings.helpers({
    email: function(){
      var user=Meteor.user();
