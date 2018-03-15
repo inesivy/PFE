@@ -10,8 +10,8 @@
           ////////////////////////////////////////////////////////////////////
           // Create Test Users
           //
-          if (Meteor.users.find().fetch().length === 1) {
-
+          if (Meteor.users.find().fetch().length === 0) {
+           process.env.MAIL_URL="smtp://meteor.email.2014%40gmail.com:P455w0rd2014@smtp.gmail.com:465/";
             console.log('Creating users: ');
 
             var users = [
@@ -55,6 +55,35 @@
 
     throw new Meteor.Error(403, "Not authorized to create new users");
   });
+
+  Meteor.methods({
+  updateEmail(newAddress) {
+    const userId = this.userId;
+    if (userId) {
+      const currentEmail = Meteor.users.findOne(userId).emails[0].address;
+      Accounts.addEmail(userId, newAddress);
+      Accounts.removeEmail(userId, currentEmail)
+    }
+    return;
+  },
+  inviteUser(email){
+    var password=Random.id(10);
+    id = Accounts.createUser({
+      email: email,
+      password: password,
+      profile: { name: email }
+    });
+    // email verification
+    Meteor.users.update({_id: id}, {$set:{'emails.0.verified': false}});
+    Roles.addUsersToRoles(id, ['normal']);
+    from='bob@example.com';
+    subject='Invitation pour Black Hole';
+    address='http:localhost:3000';
+    text="Vous pouvez vous connecter à l'adresse suivante "+address+"avec le mot de passe:"+password+" /n"+
+     "On vous connseille de changer le mot de passe de premiere connexion";
+    Email.send({ email,from , subject, text });
+  }
+});
 }
 
 
@@ -65,7 +94,7 @@
 
 
 // Authorized users can view routes
-Meteor.publish("showRoutes", function () {
+/*Meteor.publish("showRoutes", function () {
   var user = Meteor.users.findOne({_id:this.userId});
 
   if (Roles.userIsInRole(user, ["admin","normal"])) {
@@ -109,4 +138,4 @@ Meteor.publish("manageUsers", function () {
   }
   this.stop();
   return;
-});
+});*/

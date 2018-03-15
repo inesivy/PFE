@@ -1,0 +1,31 @@
+
+
+ <template name="showRoutes">
+  <h1 class="center">Affichage des routes</h1>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  {{#if isInRole 'admin'}}
+{{> add_button_routes}}
+{{> edit_button_routes}}
+{{> delete_button_routes}}
+{{/if}}
+<p> </p>
+  <tbody>
+
+    <table id="showRoutes"  class="display" width="150%" cellspacing="0">
+      <tr>
+
+                      <th>Address</th>
+                      <th>Path</th>
+                      <th>Next Hop</th>
+                      <th>Origin</th>
+                      <th>Community</th>
+                      <th>Local Preference</th>
+                      <th>Med</th>
+
+    </tr>
+    </table>
+
+  </tbody>
+
+</template>

@@ -1,7 +1,7 @@
 <template name="settings">
   <h1 class="center">Parametrages</h1>
 <div class="row">
-    <form id="settings">
+    <form id="change_password">
       <div class="row">
         <div class="input-field col s6">
           <input id="old_password" name="old_password" type="password" class="validate">
@@ -19,14 +19,23 @@
         </div>
       </div>
       <div class="row">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <button class="btn waves-effect waves-light" id="submit_password" type="submit">Sauvegarder<i class="material-icons right">send</i></button>
+      </div>
+      </form>
+      <br>
+      <br>
+      <br>
+      <form id="change_email">
+      <div class="row">
         <div class="input-field col s6">
-          <input id="email"  name="email" type="email" value="{{emails.[0].address}}" class="validate">
-          <label for="email">Email</label>
+          <input  id="email"  name="email" type="email" value={{email.[0].address}} class="validate">
+          <label class="active" for="email">Email</label>
         </div>
       </div>
 <div class="row">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<button class="btn waves-effect waves-light" type="submit">Sauvegarder<i class="material-icons right">send</i></button>
+<button class="btn waves-effect waves-light" id="submit_email" type="submit">Sauvegarder<i class="material-icons right">send</i></button>
 </div>
     </form>
   </div>

@@ -1,0 +1,66 @@
+<template name="editRoutes">
+	<div class="modal fade" role="dialog">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="address" name="address" value={{address}} type="text" class="validate">
+                <label class="active" for="address">Address</label>
+              </div>
+              </div>
+             <div class="row">
+              <div class="input-field col s6">
+                <input id="nexthop" name="nexthop" value={{nexthop}} type="text" class="validate">
+                <label class="active" for="nexthop">Next hop</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s1">
+                <input id="med" name="med" value={{med}} type="number" min=0 class="validate">
+                <label class="active" for="med">MED</label>
+              </div>
+              <div class="input-field col s2">
+                <input id="local_pref" name="local_pref" value={{local_pref}} type="number" min=0 class="validate">
+                <label class="active" for="local_pref">Local Preference</label>
+              </div>
+              <div class="input-field col s1">
+                <input id="origin" name="origin" value={{origin}} type="text" class="validate">
+                <label class="active" for="origin">Origin</label>
+              </div>
+            </div>
+            <div class="row">
+             <div class="input-field col s6">
+               <input id="as_path" name="as_path" value={{as_path}} type="text" class="validate">
+               <label class="active" for="as_path">AS Path</label>
+             </div>
+           </div>
+           <div class="row">
+            <div class="input-field col s6">
+              <input id="community" name="community" value={{community}} type="text" class="validate">
+              <label class="active" for="community">Community</label>
+            </div>
+          </div>
+      <div class="row">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <button class="btn waves-effect waves-light" type="submit" name="edit">Sauvegarder<i class="material-icons right">send</i></button>
+      </div>
+          </form>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+	</div>
+</template>
+
+<template name="edit_button_routes">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <button class="btn-floating btn-large waves-effect waves-light red" id="edit_button_routes" data-modal="signIn"><i class="material-icons">edit</i></button>
+</template>
