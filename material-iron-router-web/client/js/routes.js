@@ -1,15 +1,12 @@
 
 if(Meteor.isClient){
+	var table;
 	Template.add_button_routes.events({
 		'click button': function(event){
 			Modal.show('addRoutes')
 		}
 	});
-	Template.edit_button_routes.events({
-	 'click button': function(event){
-		 Modal.show('editRoutes')
-	 }
-	});
+
   Template.showRoutes.onRendered(function(){
 		var user = Meteor.userId()
 		HTTP.call( 'GET', 'api/'+user, function( error, response ) {
@@ -17,7 +14,7 @@ if(Meteor.isClient){
 				console.log( error );
 			} else {
 				console.log( response.data)
-		      var table=$('#showRoutes').DataTable({
+		       table=$('#showRoutes').DataTable({
 						 //"bLengthChange": false, //used to hide the property
 		          data : response.data,
 							"oLanguage": {
@@ -46,7 +43,7 @@ if(Meteor.isClient){
 							{ data: "Med" }
 						]
 
-		      });
+		      }),
 					$('#showRoutes tbody').on( 'click', 'tr', function () {
 			 if ( $(this).hasClass('selected') ) {
 					 $(this).removeClass('selected');
@@ -56,24 +53,41 @@ if(Meteor.isClient){
 					 $(this).addClass('selected');
 			 }
 	 } ),
-	 Template.delete_button_routes.events({
-		'click button': function(event){
-			if(confirm("Are you sure?")) {
-			var selectedRouteId = table.row('.selected').data()._id;
-			var user = Meteor.userId()
-		 HTTP.call( 'DELETE', 'api/'+user+'/'+selectedRouteId, function( error, response ) {
-			 if ( error ) {
-				 console.log( error );
-			 } else {
-				 if(response.data.error===false){
-					 table.row('.selected').remove().draw( false );
-				 }
-				 console.log( response );
-			 }
-			});
+	 $('#edit_button_routes').on( 'click', function () {
+     console.log("okok")
+		 var selectedRoute = table.row('.selected').data();
+		 console.log(selectedRoute)
+		 if(selectedRoute==undefined){
+					alert("Choose route");
 		 }
-		}
-	}),
+		 else{
+			 Modal.show('editRoutes')
+		 }
+
+} ),
+		$('#delete_button_routes').on( 'click', function () {
+			var selectedRoute = table.row('.selected').data();
+ 		 console.log(selectedRoute)
+ 		 if(selectedRoute==undefined){
+ 					alert("Choose route");
+ 		 }
+		 else{
+			 if(confirm("Are you sure?")) {
+ 			var selectedRouteId = table.row('.selected').data()._id;
+ 			var user = Meteor.userId();
+ 		 HTTP.call( 'DELETE', 'api/'+user+'/'+selectedRouteId, function( error, response ) {
+ 			 if ( error ) {
+ 				 console.log( error );
+ 			 } else {
+ 				 if(response.data.error===false){
+ 					 table.row('.selected').remove().draw( false );
+ 				 }
+ 				 console.log( response );
+ 			 }
+ 			});
+ 		 }
+		 }
+	 }),
 	Template.editRoutes.events({
 		'submit form': function ( event ) {
 			event.preventDefault();
@@ -109,31 +123,33 @@ if(Meteor.isClient){
 				}
 
 	 })
+
  }
 
 }),
 	Template.editRoutes.helpers({
-		 address: function(){
-				 return table.row('.selected').data().Address
-		 },
-		 nexthop: function(){
-				 return table.row('.selected').data().NextHop
-		 },
-		 med: function(){
-			 return table.row('.selected').data().Med
-		 },
-		 local_pref: function(){
-			 return table.row('.selected').data().LocalPreference
-		 },
-		 origin: function(){
-			 return table.row('.selected').data().Origin
-		 },
-		 as_path: function(){
-			 return table.row('.selected').data().Path
-		 },
-		 community: function(){
-			return table.row('.selected').data().Community
-		 }
+			 address: function(){
+				 console.log(table.row('.selected').data());
+					 return table.row('.selected').data().Address
+			 },
+			 nexthop: function(){
+					 return table.row('.selected').data().NextHop
+			 },
+			 med: function(){
+				 return table.row('.selected').data().Med
+			 },
+			 local_pref: function(){
+				 return table.row('.selected').data().LocalPreference
+			 },
+			 origin: function(){
+				 return table.row('.selected').data().Origin
+			 },
+			 as_path: function(){
+				 return table.row('.selected').data().Path
+			 },
+			 community: function(){
+				return table.row('.selected').data().Community
+			 }
 	});
 
 

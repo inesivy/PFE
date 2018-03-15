@@ -5,7 +5,7 @@ InitNemu()
 
 "InitNemu(session='blackholerouting', workspace='/home/magoni/bhre/', hdcopy=True)"
 
-vf =VFs('/net/ens/vince/virt/fs/debian8.img'
+vf =VFs('/net/ens/vince/virt/fs/debian8.img')
 
 VHostConf('debian', display='sdl', vga='std', enable_kvm=None, localtime=None, k='fr', m='4G', cpu='kvm64')
 
