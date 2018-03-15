@@ -93,20 +93,4 @@ tfoot input {
 
 
 
-@import "compass/css3";
-
-body, html {
-  height: 100%;
-  background: #fff;
-}
-
-.container {
-  width: 200px;
-  height: 100%;
-  margin: 0 auto 0;
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  background: #fff;
-}
-
 

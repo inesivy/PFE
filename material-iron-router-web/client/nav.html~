@@ -1,10 +1,28 @@
+<template name="nav">
   <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
-      </ul>
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="{{pathFor 'home'}}" class="brand-logo">
+          <img alt="UserAccounts" width="25" height="25" src="/imgs/ua-logo.png">
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li class="{{isActiveRoute regex='routes'}}"><a href="{{pathFor 'routes'}}">Routage</a></li>
+          {{#if isInRole 'admin'}}
+          <li class="{{isActiveRoute regex='users'}}"><a href="{{pathFor 'users'}}">Gestion des utilisateurs</a></li>
+          {{/if}}
+	         {{#if isInRole 'admin,normal'}}
+ 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Parametrages</a></li>
+          {{/if}}
+          <li>{{> atNavButton }}</li>
+        </ul>
+
+	
+	<ul class="left hide-on-med-and-down">
+          <li class="{{isActiveRoute regex='home'}}"><a href="{{pathFor 'home'}}">Accueil</a></li>
+	</ul> 
+
+        <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+      </div>
     </div>
   </nav>
+</template>
