@@ -11,7 +11,7 @@
           <li class="{{isActiveRoute regex='users'}}"><a href="{{pathFor 'users'}}">Gestion des utilisateurs</a></li>
           {{/if}}
 	         {{#if isInRole 'admin,normal'}}
- 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Parametrages</a></li>
+ 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Paramètres</a></li>
           {{/if}}
           <li>{{> atNavButton }}</li>
         </ul>
