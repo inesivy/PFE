@@ -11,7 +11,7 @@
           // Create Test Users
           //
           if (Meteor.users.find().fetch().length === 0) {
-           process.env.MAIL_URL="smtp://meteor.email.2014%40gmail.com:P455w0rd2014@smtp.gmail.com:465/";
+
             console.log('Creating users: ');
 
             var users = [
@@ -25,7 +25,7 @@
 
               console.log(userData);
 
-              id = Accounts.createUser({
+             id = Accounts.createUser({
                 email: userData.email,
                 password: "user",
                 profile: { name: userData.name }
@@ -46,7 +46,7 @@
   // Prevent non-authorized users from creating new users
   //
 
-  Accounts.validateNewUser(function (user) {
+  /*Accounts.validateNewUser(function (user) {
     var loggedInUser = Meteor.user();
 
     if (Roles.userIsInRole(loggedInUser, ['admin'])) {
@@ -54,19 +54,28 @@
     }
 
     throw new Meteor.Error(403, "Not authorized to create new users");
-  });
+  });*/
 
   Meteor.methods({
   updateEmail(newAddress) {
-    const userId = this.userId;
+    var userId = this.userId;
     if (userId) {
-      const currentEmail = Meteor.users.findOne(userId).emails[0].address;
+      var currentEmail = Meteor.users.findOne(userId).emails[0].address;
       Accounts.addEmail(userId, newAddress);
       Accounts.removeEmail(userId, currentEmail)
     }
     return;
   },
   inviteUser(email){
+
+    smtp = {
+    username: 'russkiypaladin@gmail.com',
+    password: 'heckfyxbr23',
+    server: 'smtp.gmail.com',
+    port: 587
+    }
+  process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+//    process.env.MAIL_URL="smtp://pichuzhkin.ruslan%40gmail.com:heckfyxbr@smtp.gmail.com:587/"; //587
     var password=Random.id(10);
     id = Accounts.createUser({
       email: email,
@@ -76,14 +85,16 @@
     // email verification
     Meteor.users.update({_id: id}, {$set:{'emails.0.verified': false}});
     Roles.addUsersToRoles(id, ['normal']);
-    from='bob@example.com';
+    console.log(email)
+    from='pichuzhkin.ruslan@gmail.com';
     subject='Invitation pour Black Hole';
     address='http:localhost:3000';
     text="Vous pouvez vous connecter à l'adresse suivante "+address+"avec le mot de passe:"+password+" /n"+
      "On vous connseille de changer le mot de passe de premiere connexion";
-    Email.send({ email,from , subject, text });
+    Email.send({email,from , subject, text });
   }
 });
+
 }
 
 

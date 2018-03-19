@@ -1,4 +1,5 @@
 //API
+
 if(Meteor.isServer){
 
     Router.route('/api/:id_user/', {

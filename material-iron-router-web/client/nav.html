@@ -11,15 +11,12 @@
           <li class="{{isActiveRoute regex='users'}}"><a href="{{pathFor 'users'}}">Gestion des utilisateurs</a></li>
           {{/if}}
 	         {{#if isInRole 'admin,normal'}}
- 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Parametrages</a></li>
+ 	         <li class="{{isActiveRoute regex='settings'}}"><a href="{{pathFor 'settings'}}">Paramètres</a></li>
           {{/if}}
           <li>{{> atNavButton }}</li>
         </ul>
 
-	
-	<ul class="left hide-on-med-and-down">
-          <li class="{{isActiveRoute regex='home'}}"><a href="{{pathFor 'home'}}">Accueil</a></li>
-	</ul> 
+
 
         <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
       </div>
