@@ -58,7 +58,7 @@ if(Meteor.isClient){
 		 var selectedRoute = table.row('.selected').data();
 		 console.log(selectedRoute)
 		 if(selectedRoute==undefined){
-					alert("Choose route");
+					alert("Choisissez une route");
 		 }
 		 else{
 			 Modal.show('editRoutes')
@@ -69,7 +69,7 @@ if(Meteor.isClient){
 			var selectedRoute = table.row('.selected').data();
  		 console.log(selectedRoute)
  		 if(selectedRoute==undefined){
- 					alert("Choose route");
+ 					alert("Choisissez une route");
  		 }
 		 else{
 			 if(confirm("Are you sure?")) {
@@ -95,7 +95,7 @@ if(Meteor.isClient){
 			var nexthop = $('[name="nexthop"]').val();
 			var med  = $( '[name="med"]').val();
 			var local_pref = $('[name="local_pref"]').val();
-			var origin    = $('[name="origin"]' ).val();
+			var origin    = $('input[name=origin]:checked').val();//$('[name="origin"]' ).val();
 			var as_path = $('[name="as_path"]').val();
 			var community = $('[name="community"]' ).val();
 			var user = Meteor.userId();

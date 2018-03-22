@@ -5,6 +5,8 @@ AccountsTemplates.configure({
     overrideLoginErrors: true,
     enablePasswordChange: true,
 
+
+    hideSignUpLink:true,
   // sendVerificationEmail: true,
   // enforceEmailVerification: true,
   //confirmPassword: true,
