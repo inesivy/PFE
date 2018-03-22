@@ -40,7 +40,8 @@ if(Meteor.isClient){
 							{ data: "Origin" },
 							{ data: "Community" },
 							{ data: "LocalPreference" },
-							{ data: "Med" }
+							{ data: "Med" },
+                            { data: "CreatedAt" }
 						]
 
 		      }),
