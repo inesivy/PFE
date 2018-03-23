@@ -70,10 +70,17 @@ Link(client='attacker:1', core='sw2:1')
 Link(client='client:0', core='sw2:0')
 Link(client='client:1', core='sw1:1')
 
-Link(client='border-router:0', core='sw3:0')
+Link(client='target:0', core='sw3:0')
 Link(client='route-server:0', core='sw3:1')
-Link(client='target:0', core='sw4:0')
+Link(client='target:1', core='sw4:0') 
 Link(client='border-router:1', core='sw4:1')
+
+'faire dhclient eth2'
+VSlirp('slirp1', net='192.168.1.0/24')
+Link(client='attacker:2', core='slirp1')
+'faire dhclient eth2'
+VSlirp('slirp2', net='192.168.2.0/24')
+Link(client='border-router:2', core='slirp2')
 
 'faire dhclient eth2'
 VSlirp('slirp1', net='192.168.1.0/24')
