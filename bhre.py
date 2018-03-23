@@ -59,10 +59,10 @@ SetIface("sw3:1", proto='udp', port=10007, lport=10006)
 SetIface("sw3:2", proto='udp', port=10006, lport=10007)
 SetIface("sw3:3", proto='udp', port=10008, lport=10009)
 
-VSwitch('sw4', niface=2)
+'''VSwitch('sw4', niface=2)
 SetIface("sw4:0", proto='udp', port=11013, lport=11014)
 SetIface("sw4:1", proto='udp', port=11015, lport=11016)
- 
+ '''
 Link(client='attacker:0', core='sw1:0')
 Link(client='attacker:1', core='sw2:1')
 Link(client='client:0', core='sw2:0')
@@ -70,8 +70,8 @@ Link(client='client:1', core='sw1:1')
 
 Link(client='target:0', core='sw3:0')
 Link(client='route-server:0', core='sw3:1')
-Link(client='target:2', core='sw4:0') 
-Link(client='border-router:1', core='sw4:1')
+'''Link(client='target:2', core='sw4:0') '''
+'''Link(client='border-router:1', core='sw4:1')'''
 
 'faire dhclient eth2'
 VSlirp('slirp1', net='192.168.1.0/24')
@@ -79,7 +79,7 @@ Link(client='attacker:2', core='slirp1')
 'faire dhclient eth2'
 VSlirp('slirp2', net='192.168.2.0/24')
 Link(client='border-router:2', core='slirp2')
-
+Link(client='border-router:0', core='sw3:3')
 
 'faire dhclient eth1'
 VSlirp('slirp3', net='192.168.3.0/24')
