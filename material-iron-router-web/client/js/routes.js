@@ -73,7 +73,7 @@ if(Meteor.isClient){
  					alert("Choisissez une route");
  		 }
 		 else{
-			 if(confirm("Are you sure?")) {
+			 if(confirm("Voulez-vous vraiment supprimer cette route?")) {
  			var selectedRouteId = table.row('.selected').data()._id;
  			var user = Meteor.userId();
  		 HTTP.call( 'DELETE', 'api/'+user+'/'+selectedRouteId, function( error, response ) {

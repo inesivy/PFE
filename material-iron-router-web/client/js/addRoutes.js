@@ -1,4 +1,12 @@
+
 if(Meteor.isClient){
+    var route="";
+    var med_word="";
+    var nexthop_word="";
+    var local_pref_word="";
+    var origin_word="";
+    var as_path_word="";
+    var community_word="";
   Template.addRoutes.events({
     'submit form': function ( event ) {
       event.preventDefault();
@@ -9,7 +17,50 @@ if(Meteor.isClient){
       var origin  = $('input[name=origin]:checked').val();//$( '[name="origin"]' ).val();
       var as_path = $('[name="as_path"]').val();
       var community = $( '[name="community"]' ).val();
-      var user = Meteor.userId()
+      var user = Meteor.userId();
+        console.log(address)
+      if(address!==''){
+          route="route";
+      }
+      if(nexthop!==''){
+         nexthop_word="next-hop";
+      }
+        if(med!==''){
+            med_word="med";
+        }
+        if(local_pref!==''){
+            local_pref_word="local-preference";
+        }
+        if(origin!==''){
+            origin_word="origin";
+        }
+        if(as_path!==''){
+            as_path_word="as-path";
+            as_path="["+as_path+"]";
+        }
+        if(community!==''){
+            community_word="community";
+            community="["+community+"]";
+        }
+
+        HTTP.call( 'POST', 'http://localhost:5001/', {
+
+                data: {
+                    "command" : "announce "+route+" "+address+" "+nexthop_word+" "+nexthop+" "+local_pref_word+" "+
+                    local_pref+" "+origin_word+" "+origin+" "+as_path_word+" "+as_path+" "+community_word+" "+community
+                }
+            },
+            function( error, response ) {
+                if ( error ) {
+                    console.log( error );
+                } else {
+                    if(response.data.error===false){
+
+                    }
+                    console.log( response)
+                }
+
+            }),
   		HTTP.call( 'POST', 'api/'+user, {
 
   			data: {
@@ -35,10 +86,4 @@ if(Meteor.isClient){
    });
   }
   });
-/*  <select id="origin" name="origin" class="validate">
-                      <option name = "myOption" value = "option-1">OPTION 1</option>
-                      <option name = "myOption" value = "option-2">OPTION 2</option>
-                      <option name = "myOption" value = "option-3">OPTION 3</option>
-                      <option name = "myOption" value = "option-4">OPTION 4</option>
-                  </select>*/
 }
