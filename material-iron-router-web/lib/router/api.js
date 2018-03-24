@@ -64,8 +64,8 @@ if(Meteor.isServer){
                 Community : this.request.body.community,
                 Origin : this.request.body.origin,
                 LocalPreference : this.request.body.local,
-                Med : this.request.body.med
-                //createdAt: new Date()
+                Med : this.request.body.med,
+                CreatedAt: new Date()
             });
             response = {
                 "error" : false,
