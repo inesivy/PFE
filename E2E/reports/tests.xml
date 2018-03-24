@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="1">
+
+  <testsuite name="tests"
+    errors="1" failures="0" hostname="" id="" package="tests" skipped="0"
+    tests="1" time="0.005000" timestamp="Thu, 22 Mar 2018 09:01:46 GMT">
+  
+    <testcase name="Demo tests PFE" classname="tests" time="0.005000" assertions="0">
+    </testcase>
+  
+
+  
+    <system-err>
+        Error while running [Tests / Demo tests PFE]:
+
+  ReferenceError: isPresent is not defined
+    at Object.Demo tests PFE (/home/benji/Bureau/ines/ENDTOENDTESTS/tests/tests.js:32:26)
+    at Module.call (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/nightwatch/lib/runner/module.js:62:34)
+    at /home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/nightwatch/lib/runner/testcase.js:70:29
+    at _fulfilled (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:834:54)
+    at self.promiseDispatch.done (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:863:30)
+    at Promise.promise.promiseDispatch (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:796:13)
+    at /home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:556:49
+    at runSingle (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:137:13)
+    at flush (/home/benji/Bureau/ines/ENDTOENDTESTS/node_modules/q/q.js:125:13)
+    at process._tickCallback (internal/process/next_tick.js:112:11)
+    </system-err>
+  
+
+  
+  </testsuite>
+</testsuites>
