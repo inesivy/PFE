@@ -89,8 +89,8 @@
     from='pichuzhkin.ruslan@gmail.com';
     subject='Invitation pour Black Hole';
     address='http:localhost:3000';
-    text="Vous pouvez vous connecter à l'adresse suivante "+address+"avec le mot de passe:"+password+" /n"+
-     "On vous connseille de changer le mot de passe de premiere connexion";
+    text="Vous pouvez vous connecter à l'adresse suivante: "+address+" avec le mot de passe suivant:"+password+" /n"+
+     "Nous vous conseillons de changer votre mot de passe lors de votre première connexion.";
     Email.send({email,from , subject, text });
   }
 });
