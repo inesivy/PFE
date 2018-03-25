@@ -1,6 +1,150 @@
 Routage vers trou noir piloté à distance.
 
 
+-------------------------------------------------------------------------------------------------
+//Installation de dynamips:
+https://github.com/GNS3/dynamips
+
+//lancement des routeurs
+./dyna.sh
 
 
+
+cd /net/ens/vince/virt/
+source nemu-init.rc
+
+//pour lancer le script python
+nemu -f bhre.py -i
+
+//lancer les VMs
+StartNemu()
+faire les updates : apt-get update
+
+//sauvegarder
+SaveNemu() sauvegarde dans l'archive bhre.tgz
+
+//fermer Correctement les VMs
+DelNemu()
+exit()
+//pour lancer la sauvegarde
+nemu -i 
+RestoreNemu('bhre.tgz')
+ImportNemu('/tmp/bhre/nemu.conf')
+StartNemu()
+
+---------------------------------------
+//router-server
+mis à jour :apt-get update
+installation  curl :apt-get install curl
+installation exabgp: apt-get install exabgp
+installation meteor: curl https://install.meteor.com/ | sh
+
+//pour lancer ExaBGP
+exabgp  /etc/exabgp/conf.ini
+
+// les autres vms:
+mis à jour :apt-get update
+------------------------------------------------------------------------------------------------------
+
+                                                //AS 2
+                                                
+ //configurer les routeurs                                                                                             
+//configuration interface R1
+ conf t
+ interface FastEthernet1/0
+ ip address 192.168.33.2 255.255.255.0
+ no shutdown
+ exit
+interface FastEthernet2/0
+ ip address 192.168.55.2 255.255.255.0
+ no shutdown
+ exit
+ interface FastEthernet3/0
+ ip address 192.168.44.2 255.255.255.0
+ no shutdown
+ end
+ 
+ //configuration BGP R1
+  conf t 
+  router bgp 2
+  neighbor 192.168.44.3 remote-as 2
+  neighbor 192.168.44.4 remote-as 2
+  neighbor 192.168.44.1 remote-as 2   
+  
+  neighbor 192.168.33.1 remote-as 1
+  neighbor 192.168.55.1 remote-as 1
+  end
+  
+  // pour sauvegarder: copy running-config startup-config
+-------------------------------------------
+//configuration route-server
+ //ouvrir le fichier de configuration d'interfaces en tapant sur le terminal le commande suivante:
+nano /etc/network/interfaces 
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.3.1/24
+     
+auto eth0
+iface eth0 inet static
+     address 192.168.44.3/24
+--------------------------------------------    
+//configuration Border Route
+
+nano /etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+     address 192.168.44.4/24
+     
+auto eth2
+iface eth2 inet static
+     address 192.168.2.1/24
+-----------------------------------------------
+//configuration Target
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+     address 192.168.44.1/24
+auto eth1
+iface eth1 inet static
+     address 192.168.4.1/24
+     
+ -----------------------------------------------------------------------------------------
+                                                   //A1
+
+//configuration Attacker
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.33.1/24
+ auto eth2
+iface eth2 inet static
+     address 192.168.1.1/24 
+     
+------------------------------------------
+//configuration client
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.55.1/24
+     
+ auto eth2
+iface eth2 inet static
+     address 192.168.5.1/24 
 
