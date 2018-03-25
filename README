@@ -8,7 +8,7 @@ https://github.com/GNS3/dynamips
 //lancement des routeurs
 ./dyna.sh
 
-configurer les routeurs
+
 
 cd /net/ens/vince/virt/
 source nemu-init.rc
@@ -21,12 +21,18 @@ StartNemu()
 faire les updates : apt-get update
 
 //sauvegarder
-SaveNemu()
+SaveNemu() sauvegarde dans l'archive bhre.tgz
 
 //fermer Correctement les VMs
 DelNemu()
 exit()
+//pour lancer la sauvegarde
+nemu -i 
+RestoreNemu('bhre.tgz')
+ImportNemu('/tmp/bhre/nemu.conf')
+StartNemu()
 
+---------------------------------------
 //router-server
 mis à jour :apt-get update
 installation  curl :apt-get install curl
@@ -39,7 +45,7 @@ mis à jour :apt-get update
 
                                                 //AS 2
                                                 
-                                                                                              
+ //configurer les routeurs                                                                                             
 //configuration interface R1
  conf t
  interface FastEthernet1/0
@@ -56,10 +62,17 @@ interface FastEthernet2/0
  end
  
  //configuration BGP R1
-
-
-
-
+  conf t 
+  router bgp 2
+  neighbor 192.168.44.3 remote-as 2
+  neighbor 192.168.44.4 remote-as 2
+  neighbor 192.168.44.1 remote-as 2   
+  
+  neighbor 192.168.33.1 remote-as 1
+  neighbor 192.168.55.1 remote-as 1
+  end
+  
+  // pour sauvegarder: copy running-config startup-config
 -------------------------------------------
 //configuration route-server
  //ouvrir le fichier de configuration d'interfaces en tapant sur le terminal le commande suivante:
