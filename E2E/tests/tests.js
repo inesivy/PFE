@@ -1,15 +1,66 @@
 module.exports = {
-  'Demo tests PFE' : function (browser) {
-      let selectID = '//select[@id="at-nav-button"]'
+  'Identification' : function (browser) {
     browser
+      //Go to CR-exaBGP website
       .url('http://localhost:3000/')
+
+      //checks if javascript is set up correctly
       .waitForElementVisible('html', 1000)
       .waitForElementVisible('body', 1000)
+      
       .assert.containsText('.container > h1', 'Bienvenue sur CR-exaBGP')
       .assert.containsText('.container > p', 'Gérer votre réseau devient facile.')
-      .click('a#at-nav-button')
-      .setValue('input.validate', 'admin@example.com')
+
+      //checks if access is not allowed without authentication
+      .assert.elementNotPresent(".mdi-alert-warning")
+      .click('a[href="/routes"]')
+      .assert.urlEquals('http://localhost:3000/routes')
+      .assert.containsText('.at-title', 'Se connecter')
+      .assert.elementPresent(".mdi-alert-warning")
+      .assert.containsText('span', 'Vous devez être connecté')
+
+      //checks the identification for the admin
+      //with the wrong address
+      .setValue('input.validate#at-field-email', 'admin@example.coms')
       .setValue('input.validate#at-field-password', 'user')
+      .click('button#at-btn')
+      .assert.containsText('span', 'Votre identifiant ou votre mot de passe est incorrect')
+
+      //with a wrong password
+      //.assert.elementNotPresent(".container")
+      .click('.brand-logo')
+      .assert.containsText('.container > h1', 'Bienvenue sur CR-exaBGP')
+      .assert.elementNotPresent(".at-title")
+      .click('a#at-nav-button')
+      .assert.elementPresent(".at-title")
+      .assert.urlEquals('http://localhost:3000/sign-in')
+      .assert.containsText('.at-title', 'Se connecter')
+      .setValue('input.validate#at-field-email', 'admin@example.com')
+      .setValue('input.validate#at-field-password', 'User')
+      .click('button#at-btn')
+      .assert.containsText('span', 'Votre identifiant ou votre mot de passe est incorrect')
+      .clearValue('input.validate#at-field-password')
+      .setValue('input.validate#at-field-password', 'user')
+      .click('button#at-btn')
+      .assert.elementNotPresent(".mdi-alert-warning")
+  },
+
+'Add a route' : function (browser) {
+    browser
+
+}
+      /*
+      //.assert.title("Se connecter")
+      .assert.elementNotPresent(".mdi-alert-warning")
+      .setValue('input.validate#at-field-password', 'user')
+      .click('button#at-btn')
+      .pause(1000)
+      .assert.elementPresent(".mdi-alert-warning")
+      .pause(1000)
+      //browser.expect.element('.mdi-alert-warning').to.not.be.present;
+      .setValue('input.validate', 'admin@example.com')
+      //.setValue('input.validate#at-field-password', 'user')
+//mdi-alert-warning
       //.useXpath()
       //.click(selectID)
       .click('button#at-btn')
@@ -37,8 +88,22 @@ module.exports = {
       //.click('selector')
       //.click('@driver.switch_to.alert.accept')
       .pause(5000)
-      .end();
-  }
+      //.end();*/
+
+
+  /*'aa' : function (browser) {
+    browser
+      //Go to CR-exaBGP website
+      .url('http://localhost:3000/')
+      .waitForElementVisible('html', 1000)
+      .waitForElementVisible('body', 1000)
+      .assert.containsText('.container > h1', 'Bienvenue sur CR-exaBGP')
+      .assert.containsText('.container > p', 'Gérer votre réseau devient facile.')
+  },*/
+
+  after: (browser) => {
+        browser.end();
+    }
 };
 
 
