@@ -1,12 +1,13 @@
 Routage vers trou noir piloté à distance.
 
 
-
+-------------------------------------------------------------------------------------------------
 //Installation de dynamips:
 https://github.com/GNS3/dynamips
 
-//lancement de R1 et R2
+//lancement des routeurs
 ./dyna.sh
+
 configurer les routeurs
 
 cd /net/ens/vince/virt/
@@ -28,58 +29,67 @@ exit()
 
 //router-server
 mis à jour :apt-get update
-installer  curl :apt-get install curl
-installer exabgp:
-installer meteor :
+installation  curl :apt-get install curl
+installation exabgp: apt-get install exabgp
+installation meteor: curl https://install.meteor.com/ | sh
 
 // les autres vms:
-u
+mis à jour :apt-get update
 ------------------------------------------------------------------------------------------------------
-
-
-
 
                                                 //AS 2
                                                 
                                                                                               
-//configuration R1
-
+//configuration interface R1
+ conf t
+ interface FastEthernet1/0
+ ip address 192.168.33.2 255.255.255.0
+ no shutdown
+ exit
 interface FastEthernet2/0
  ip address 192.168.55.2 255.255.255.0
  no shutdown
-
-interface FastEthernet3/0
- ip address 192.168.11.1 255.255.255.0
+ exit
+ interface FastEthernet3/0
+ ip address 192.168.44.2 255.255.255.0
  no shutdown
+ end
+ 
+ //configuration BGP R1
+
 
 
 
 -------------------------------------------
 //configuration route-server
+ //ouvrir le fichier de configuration d'interfaces en tapant sur le terminal le commande suivante:
+nano /etc/network/interfaces 
 
 auto lo
 iface lo inet loopback
 
 auto eth1
 iface eth1 inet static
-     address 192.168.3.2/24
+     address 192.168.3.1/24
      
 auto eth0
 iface eth0 inet static
-     address 192.168.3.1/24
+     address 192.168.44.3/24
 --------------------------------------------    
 //configuration Border Route
 
+nano /etc/network/interfaces
+
 auto lo
 iface lo inet loopback
 
 auto eth0
 iface eth0 inet static
-     address 192.168.2.1/24
+     address 192.168.44.4/24
      
-auto eth1
-iface eth1 inet static
-     address 192.168.2.2/24
+auto eth2
+iface eth2 inet static
+     address 192.168.2.1/24
 -----------------------------------------------
 //configuration Target
 
@@ -88,6 +98,9 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet static
+     address 192.168.44.1/24
+auto eth1
+iface eth1 inet static
      address 192.168.4.1/24
      
  -----------------------------------------------------------------------------------------
@@ -100,7 +113,11 @@ iface lo inet loopback
 
 auto eth1
 iface eth1 inet static
-     address 192.168.1.1/24
+     address 192.168.33.1/24
+ auto eth2
+iface eth2 inet static
+     address 192.168.1.1/24 
+     
 ------------------------------------------
 //configuration client
 
@@ -109,7 +126,9 @@ iface lo inet loopback
 
 auto eth1
 iface eth1 inet static
-     address 192.168.5.1/24
+     address 192.168.55.1/24
      
-     
+ auto eth2
+iface eth2 inet static
+     address 192.168.5.1/24 
 
