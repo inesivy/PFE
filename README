@@ -39,6 +39,9 @@ installation  curl :apt-get install curl
 installation exabgp: apt-get install exabgp
 installation meteor: curl https://install.meteor.com/ | sh
 
+//pour lancer ExaBGP
+exabgp  /etc/exabgp/conf.ini
+
 // les autres vms:
 mis à jour :apt-get update
 ------------------------------------------------------------------------------------------------------
