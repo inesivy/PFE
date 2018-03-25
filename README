@@ -2,5 +2,114 @@ Routage vers trou noir piloté à distance.
 
 
 
+//Installation de dynamips:
+https://github.com/GNS3/dynamips
 
+//lancement de R1 et R2
+./dyna.sh
+configurer les routeurs
+
+cd /net/ens/vince/virt/
+source nemu-init.rc
+
+//pour lancer le script python
+nemu -f bhre.py -i
+
+//lancer les VMs
+StartNemu()
+faire les updates : apt-get update
+
+//sauvegarder
+SaveNemu()
+
+//fermer Correctement les VMs
+DelNemu()
+exit()
+
+//router-server
+mis à jour :apt-get update
+installer  curl :apt-get install curl
+installer exabgp:
+installer meteor :
+
+// les autres vms:
+u
+------------------------------------------------------------------------------------------------------
+
+
+
+
+                                                //AS 2
+                                                
+                                                                                              
+//configuration R1
+
+interface FastEthernet2/0
+ ip address 192.168.55.2 255.255.255.0
+ no shutdown
+
+interface FastEthernet3/0
+ ip address 192.168.11.1 255.255.255.0
+ no shutdown
+
+
+
+-------------------------------------------
+//configuration route-server
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.3.2/24
+     
+auto eth0
+iface eth0 inet static
+     address 192.168.3.1/24
+--------------------------------------------    
+//configuration Border Route
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+     address 192.168.2.1/24
+     
+auto eth1
+iface eth1 inet static
+     address 192.168.2.2/24
+-----------------------------------------------
+//configuration Target
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+     address 192.168.4.1/24
+     
+ -----------------------------------------------------------------------------------------
+                                                   //A1
+
+//configuration Attacker
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.1.1/24
+------------------------------------------
+//configuration client
+
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+     address 192.168.5.1/24
+     
+     
 
