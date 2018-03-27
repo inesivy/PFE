@@ -56,7 +56,7 @@ VSwitch('sw3', niface=4)
 SetIface("sw3:0", proto='udp', port=11009, lport=11010)
 SetIface("sw3:1", proto='udp', port=10007, lport=10006)
 
-SetIface("sw3:2", proto='udp', port=10012, lport=10011)
+SetIface("sw3:2", proto='udp', port=10012, lport=10011) #les ports qui posaient problème
 SetIface("sw3:3", proto='udp', port=10008, lport=10009)
 
 '''VSwitch('sw4', niface=2)
