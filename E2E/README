@@ -1,0 +1,12 @@
+Pour lancer les tests:
+Se placer dans le dossier /E2E et effectuer la commande:
+./node_modules/.bin/nightwatch
+
+L'option -e permet de préciser le navigateur
+Il est possible d'utiliser le nacigateur chrome ou Firefox qui est par default
+
+Pour lancer les deux navigateurs en parallèle, effectuer la commande:
+
+./node_modules/.bin/nightwatch -e chrome,default
+
+
