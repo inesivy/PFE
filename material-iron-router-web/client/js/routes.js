@@ -99,7 +99,7 @@ if(Meteor.isClient){
 			var nexthop = $('[name="nexthop"]').val();
 			var med  = $( '[name="med"]').val();
 			var local_pref = $('[name="local_pref"]').val();
-			var origin    = $('input[name=origin]:checked').val();//$('[name="origin"]' ).val();
+			var origin    = $('input[name=origin]:checked').val();
 			var as_path = $('[name="as_path"]').val();
 			var community = $('[name="community"]' ).val();
 			var user = Meteor.userId();
