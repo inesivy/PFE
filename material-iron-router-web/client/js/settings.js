@@ -1,5 +1,6 @@
 
 if (Meteor.isClient) {
+  //Cettes methodes permettent de changer le mot de passe et l'email
 Template.settings.events({
   'submit #change_password': function ( event ) {
     event.preventDefault();
@@ -81,6 +82,7 @@ Template.settings.onRendered (function(){
               }
           },
          errorElement : 'div',
+         //On affiche les erreurs
           errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {

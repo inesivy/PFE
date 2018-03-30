@@ -7,7 +7,7 @@ Router.configure({
         footer: {to: 'footer'},
     }
 });
-
+//Configuration du routage pour les pages
 Router.map(function() {
     this.route('home', {
         path: '/',
@@ -20,7 +20,6 @@ Router.map(function() {
 	    onBeforeAction: function(){
              var user = Meteor.user();
 	     if (!Roles.userIsInRole(user, ["admin"])) {
-               // console.log(user)
                 Router.go('/forbidden');
                }
       else{
@@ -28,7 +27,6 @@ Router.map(function() {
         }
 	   }
 });
-  /////SHow routes
   this.route('/routes/', {
      name: 'routes',
      template: 'showRoutes'
@@ -37,12 +35,12 @@ Router.map(function() {
     this.route('/forbidden');
 });
 
-
+//Il faut etre connecté pour acceder à cettes pages
 Router.plugin('ensureSignedIn', {
   only: ['users','routes','settings'],
 });
 
-//Routes
+//Configuration des routes pour le template de l'authentification et de connexion
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('enrollAccount');
 AccountsTemplates.configureRoute('forgotPwd');

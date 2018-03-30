@@ -1,4 +1,4 @@
-// Options
+// Ces options permettent de configurer le template de connexion et d'authentification
 AccountsTemplates.configure({
     // defaultLayout: 'emptyLayout',
     showForgotPasswordLink: true,
@@ -12,7 +12,8 @@ AccountsTemplates.configure({
   //confirmPassword: true,
   //continuousValidation: false,
   //displayFormLabels: true,
-  //forbidClientAccountCreation: true,
+  forbidClientAccountCreation: true,
+  hideSignUpLink: true,
   //formValidationFeedback: true,
   //homeRoutePath: '/',
   //showAddRemoveServices: false,

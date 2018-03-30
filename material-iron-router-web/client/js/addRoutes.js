@@ -7,6 +7,7 @@ if(Meteor.isClient){
     var origin_word="";
     var as_path_word="";
     var community_word="";
+    //On recuppere les champs du formulaire
   Template.addRoutes.events({
     'submit form': function ( event ) {
       event.preventDefault();
@@ -19,6 +20,7 @@ if(Meteor.isClient){
       var community = $( '[name="community"]' ).val();
       var user = Meteor.userId();
         console.log(address)
+
       if(address!==''){
           route="route";
       }
@@ -42,7 +44,7 @@ if(Meteor.isClient){
             community_word="community";
             community="["+community+"]";
         }
-
+//Envoyer seulement les attributs defini à exaBGP
         HTTP.call( 'POST', 'http://localhost:5001/', {
 
                 data: {
@@ -61,6 +63,7 @@ if(Meteor.isClient){
                 }
 
             }),
+  //Envoyer HTTP requete à API
   		HTTP.call( 'POST', 'api/'+user, {
 
   			data: {

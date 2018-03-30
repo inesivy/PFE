@@ -1,7 +1,8 @@
-//API
-
+//API RESTful qui utilise les methodes GET, POST, PUT et delete
+//Pour chaque methode on verifie qu'utilisateur a le droit d'executer telle methode en fonction de la role de l'utilisateur(utilisateur ou admin)
+//La reponse sera en JSON
 if(Meteor.isServer){
-
+//Recevoir toutes les routes
     Router.route('/api/:id_user/', {
       where: 'server',
     })
@@ -38,15 +39,16 @@ if(Meteor.isServer){
   this.response.setHeader('Content-Type','application/json');
   this.response.end(JSON.stringify(response));
 })
+//Ajouter une route
     .post(function(){
        var response;
        console.log(this.request.body)
        if(  this.params.id_user !== undefined) {
          var user = Meteor.users.findOne({_id : this.params.id_user});
-        // console.log(user)
          if(user !== undefined) {
            console.log(user.roles)
            if(user.roles=='admin'){
+             //Si tous les champs sont vides alors on n'ajoute pas la route
               if(this.request.body.address === undefined || this.request.body.path === undefined||
         this.request.body.community === undefined || this.request.body.next_hop === undefined||
         this.request.body.origin === undefined || this.request.body.local === undefined||
@@ -92,7 +94,7 @@ if(Meteor.isServer){
       this.response.end(JSON.stringify(response));
     });
 
-///delete and update Routes
+//Supprimer et mettre à jour les routes avec id de la route
 Router.route('/api/:id_user/:id_route', {
     where: 'server'
 })
@@ -100,7 +102,6 @@ Router.route('/api/:id_user/:id_route', {
     var response;
         if(this.params.id_user !== undefined) {
           var user = Meteor.users.findOne({_id : this.params.id_user});
-          //console.log(user)
           if(user !== undefined) {
             if(user.roles=='admin'){
             var data = Routes.find({_id : this.params.id_route}).fetch();

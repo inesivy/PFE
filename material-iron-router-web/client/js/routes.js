@@ -14,6 +14,7 @@ if(Meteor.isClient){
 				console.log( error );
 			} else {
 				console.log( response.data)
+				//Création de la DataTable pour afficher les routes
 		       table=$('#showRoutes').DataTable({
 						 //"bLengthChange": false, //used to hide the property
 		          data : response.data,
@@ -31,7 +32,6 @@ if(Meteor.isClient){
 			        '<option value="-1">All</option>' +
 			        '</select></div>'
 			    },
-			   // bAutoWidth: false,
 
 						columns: [
 							{ data: "Address" },
@@ -41,7 +41,7 @@ if(Meteor.isClient){
 							{ data: "Community" },
 							{ data: "LocalPreference" },
 							{ data: "Med" },
-                            { data: "CreatedAt" }
+              { data: "CreatedAt" }
 						]
 
 		      }),
@@ -54,6 +54,7 @@ if(Meteor.isClient){
 					 $(this).addClass('selected');
 			 }
 	 } ),
+	 //On verifie qu'on a bien selectionné la route pour la modifier
 	 $('#edit_button_routes').on( 'click', function () {
      console.log("okok")
 		 var selectedRoute = table.row('.selected').data();
@@ -66,6 +67,7 @@ if(Meteor.isClient){
 		 }
 
 } ),
+//On verifie qu'on a bien selectionné la route pour la supprimer
 		$('#delete_button_routes').on( 'click', function () {
 			var selectedRoute = table.row('.selected').data();
  		 console.log(selectedRoute)
@@ -89,6 +91,7 @@ if(Meteor.isClient){
  		 }
 		 }
 	 }),
+	 //Cette  methode permet de mettre à jour la route apres avoir validé le formulaire
 	Template.editRoutes.events({
 		'submit form': function ( event ) {
 			event.preventDefault();
@@ -128,6 +131,7 @@ if(Meteor.isClient){
  }
 
 }),
+//Cette methode permet de recupperer la route selectionnée dans le formulaire afin de la modifier
 	Template.editRoutes.helpers({
 			 address: function(){
 				 console.log(table.row('.selected').data());

@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+  //Cette methode permet d'envoyer un email à un utilisateur afin de l'inviter
   Template.users.events({
    'submit #invite': function ( event ) {
      event.preventDefault();
